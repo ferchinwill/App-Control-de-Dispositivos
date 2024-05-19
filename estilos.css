@@ -1,0 +1,268 @@
+/* Estilos de animación y hover */
+.Tarjeta-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.Tarjeta {
+    width: auto;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.Mis_Dispositivos {
+    width: 300px;
+    margin: 10px;
+    margin-left: 50vh;
+    /* Alineación a la izquierda */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.Mis_Dispositivos:hover .lc-name {
+    color: #007bff;
+    /* Cambia el color al hacer hover */
+}
+
+/* Estilos para dispositivos pequeños */
+@media (max-width: 768px) {
+    .Mis_Dispositivos {
+        width: 100%;
+        /* Ocupa todo el ancho */
+        margin-left: 0;
+        /* Elimina el margen izquierdo */
+        margin-right: 0;
+        /* Elimina el margen derecho */
+    }
+}
+
+.Tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.Tarjeta:hover .lc-name {
+    color: #007bff;
+    /* Cambia el color al hacer hover */
+}
+
+/* Otros estilos */
+
+
+.lc-name .btn-group {
+    display: flex;
+    gap: 10px;
+    /* Espacio entre botones */
+}
+
+.text-muted {
+    font-size: 0.9rem;
+}
+
+
+.hr-minimalista {
+    border: none;
+    height: 10px;
+    background-color: #888;
+    margin: 8px auto;
+    /* Centraliza horizontalmente y ajusta el margen */
+    width: 100vh;
+    /* Ancho más pequeño */
+    border-radius: 5px;
+    /* Radio de borde para hacerlo redondeado */
+}
+
+.Tarjeta {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    /* Fondo gris */
+}
+
+.Tarjeta .flex-grow-1 {
+    text-align: left;
+    /* Alinear el texto a la izquierda */
+}
+
+.btn-apagar {
+    background-color: #888;
+    border-radius: 100px;
+    width: 70px;
+    color: #ccc;
+}
+
+.btn-apagar:hover {
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 100px;
+    width: 70px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.btn-encender {
+    background-color: #888;
+    border-radius: 100px;
+    width: 70px;
+}
+
+
+
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #28a745;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #28a745;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+
+#scrollEffect .col-md-4 {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 3s ease;
+}
+
+#scrollEffect .show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[id^="scrollEffectText"] {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 3s ease;
+}
+
+[id^="scrollEffectText"].show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+
+.lc-block {
+    text-align: center;
+}
+
+.lc-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.lc-button:hover {
+    background-color: #d9d9d9;
+}
+
+
+.lc-button i {
+    font-size: 24px;
+    color: #888;
+}
+
+.lc-name {
+    display: flex;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.lc-description {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #888;
+}
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 1.4s ease-in-out;
+  
+}
+
+/* Estilo para mostrar los elementos gradualmente */
+.fade-in.active {
+    opacity: 1;
+}
