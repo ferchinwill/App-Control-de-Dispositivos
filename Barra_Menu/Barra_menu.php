@@ -3,19 +3,31 @@
                 <div class="row pt-2">
                     <div class="col-md-4 text-center py-4">
                         <div class="lc-block">
-                            <a href="/Menu_Opciones_paginas/Agregar_Dispositivo.php"> <!---Link de paginas de los botones --->
+                            <a href="/Menu_Opciones_paginas/Crear_DispositivosD.php"> <!---Link de paginas de los botones --->
                                 <button class="lc-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
                                     </svg>
                                 </button></a>
-                            <div class="lc-name">Agregar</div>
+                            <div class="lc-name">Crear</div>
                             <div class="lc-description">Dispositivo</div>
                         </div>
                     </div>
                     <div class="col-md-4 text-center py-4">
                         <div class="lc-block">
-                            <a href="/AgregarD.php"> <!---Link de paginas de los botones --->
+                            <a href="/Menu_Opciones_paginas/Agregar_Tipo_Dispositivo.php"> <!---Link de paginas de los botones --->
+                                <button class="lc-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                                    </svg>
+                                </button></a>
+                            <div class="lc-name">Tipos</div>
+                            <div class="lc-description">Dispositivo</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center py-4">
+                        <div class="lc-block">
+                            <a href="/Menu_Opciones_paginas/Tus_Dispositivos.php"> <!---Link de paginas de los botones --->
                                 <button class="lc-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
                                         <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1" />
@@ -27,7 +39,7 @@
                     </div>
                     <div class="col-md-4 text-center py-4">
                         <div class="lc-block">
-                            <a href="/AgregarD.php"><!---Link de paginas de los botones --->
+                            <a href="/Menu_Opciones_paginas/Editar_Tipo_Dispositivo.php"><!---Link de paginas de los botones --->
                                 <button class="lc-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                                         <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001" />
@@ -54,7 +66,7 @@
                     </div>
                     <div class="col-md-4 text-center py-4">
                         <div class="lc-block">
-                            <a href="Actualizar_Dispositivo.php"> <!---Link de paginas de los botones --->
+                            <a href="/Menu_Opciones_paginas/Actualizar_Tipo_Dispositivo.php"> <!---Link de paginas de los botones --->
                                 <button class="lc-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
                                         <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />

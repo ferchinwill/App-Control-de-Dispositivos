@@ -1,18 +1,29 @@
 <?php
 
+
+
+/*
+{
+  "deviceId": 0,
+  "deviceName": "string",
+  "deviceTypeId": 0
+}
+
+*/
 require '/Embebidos_Proyect/Apis/Apis.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
-    $device_id = $_POST['device_id'];
-    $new_name = $_POST['new_name'];
+    $deviceId = $_POST['device_Id'];
+    $NewDevice_Name = $_POST['NewDevice_Name'];
 
+
+    $update_url  = $ApiLink . '/api/device/update-device';   ///PUT
     // URL de la API de actualización de dispositivos
-    $update_url = $ApiLink .'/api/device-type/update-device-type';
 
     // Datos a enviar en la solicitud POST JSON
     $post_data = json_encode(array(
-        'deviceTypeId' => $device_id,
-        'deviceTypeName' => $new_name
+        'deviceId' => $device_Id,
+        'deviceName' => $NewDevice_Name
     ));
 
     // Iniciar la solicitud cURL para actualizar el dispositivo
@@ -41,4 +52,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Acceso no permitido.";
 }
-?>

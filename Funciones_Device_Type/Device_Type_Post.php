@@ -1,6 +1,11 @@
 <?php
 require '/Embebidos_Proyect/Apis/Apis.php';
 
+
+
+
+///
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // URL de la API
     $url = $ApiLink.'/api/device-type/create-device-type';
@@ -42,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // La respuesta de la API estará en formato JSON, puedes procesarla según lo necesites
     echo $response;
-    header('Location: AgregarD.php');
+    header('Location: Agregar_Tipo_Dispositivo.php');
 } else {
     // Si se intenta acceder directamente a submit.php sin enviar datos por POST, redirige al formulario
     header('Location: index.html');
