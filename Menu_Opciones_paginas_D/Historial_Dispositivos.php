@@ -208,18 +208,14 @@
         </div>
         <div class="lc-block col-lg-6 mx-auto mb-4">
             <div editable="rich">
-
-
             </div>
         </div>
 
-        <style>
 
-        </style>
         <a href=""></a>
 
         <!----Barra de Navegacion--->
-        <?php require '/Embebidos_Proyect/Barra_Menu/Barra_menu.php'; ?>
+        <?php require '/Embebidos_Proyect/Barra_Menu/Barra_Menu_Dispositivos.php'; ?>
         <hr class="hr-minimalista">
 
 
@@ -229,24 +225,41 @@
 
         </div>
         <!-- ========== Tarjetas Mis dispositivos ========== -->
-
-
-        <div class="" id="scrollEffectText1">
-            <div class="">
-                <div class="px-3">
-                    <h3 class="fw-bold">Crear un Nuevo Dispositivo</h3>
-                    <form action="/Funciones_Device/Create_Device.php" method="post">
-                        <label for="deviceName">Nombre del Dispositivo:</label>
-                        <input type="text" id="deviceName" name="deviceName" required>
-                        <button class="btn btn-primary" type="submit">Agregar Dispositivo</button>
-                    </form>
+        <div class="mx-auto col-xl-6" id="scrollEffectText1">
+            <div class="lc-block d-sm-flex align-items-center mb-4 Tarjeta">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped px-5">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Clase</th>
+                                    <th>Estilo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>mx-auto col-xl-6</td>
+                                    <td>None</td>
+                                </tr>
+                                <tr>
+                                    <td>lc-block d-sm-flex align-items-center mb-4 Tarjeta</td>
+                                    <td>None</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
         <hr class="hr-minimalista">
-
-
-
         <style>
             .btn-estado {
                 padding: 0.5rem 1rem;
@@ -372,8 +385,6 @@
                 background-color: black;
             }***********************/
         </style>
-
-
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 </body>

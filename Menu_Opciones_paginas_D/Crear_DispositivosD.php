@@ -1,46 +1,3 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener los datos del formulario
-    $device_id = $_POST['device_id'];
-    $new_name = $_POST['new_name'];
-
-    // URL de la API de actualización de dispositivos
-    $update_url = 'https://fe85-148-237-98-221.ngrok-free.app/api/device-type/update-device-type';
-
-    // Datos a enviar en la solicitud POST
-    $post_data = array(
-        'deviceTypeId' => $device_id,
-        'deviceTypeName' => $new_name
-    );
-
-    // Iniciar la solicitud cURL para actualizar el dispositivo
-    $update_curl = curl_init($update_url);
-    curl_setopt($update_curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($update_curl, CURLOPT_POST, true);
-    curl_setopt($update_curl, CURLOPT_POSTFIELDS, json_encode($post_data));
-    curl_setopt($update_curl, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',
-        'Accept: application/json',
-    ));
-
-    // Ejecutar la solicitud y obtener la respuesta
-    $update_response = curl_exec($update_curl);
-    $update_httpCode = curl_getinfo($update_curl, CURLINFO_HTTP_CODE);
-
-    // Cerrar la conexión cURL
-    curl_close($update_curl);
-
-    // Verificar el código de estado HTTP de la respuesta
-    if ($update_httpCode == 200) {
-        echo "Dispositivo actualizado correctamente.";
-    } else {
-        echo "Error al actualizar el dispositivo. Código de estado HTTP: " . $update_httpCode;
-    }
-} else {
-    echo "Acceso no permitido.";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,14 +5,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="/estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/livecanvas-team/ninjabootstrap/dist/css/bootstrap.min.css" media="all">
 </head>
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light py-1">
         <div class="container d-flex align-items-center">
-            <a href="#"><img src="./source_proyect/fians.png" alt="" style="height: 150px;"></a>
+            <a href="/index.php"><img src="/source_proyect/fians.png" alt="" style="height: 150px;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -240,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container-fluid px-4 py-10 my-5 text-center ">
         <div class="lc-block d-block mx-auto mb-4 fade-in">
-            <img src="./source_proyect/perfil.png" alt="" style="height: 150px; width: 150px; box-shadow: gray;">
+            <img src="/source_proyect/perfil.png" alt="" style="height: 150px; width: 150px; box-shadow: gray;">
         </div>
         <div class="lc-block">
             <div editable="rich">
@@ -260,158 +217,97 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         </style>
         <a href=""></a>
-      <!----Barra de Navegacion--->
-      <?php require '/Embebidos_Proyect/Barra_Menu/Barra_menu.php'; ?>
-       
+
+        <!----Barra de Navegacion--->
+        <?php require '/Embebidos_Proyect/Barra_Menu/Barra_Menu_Dispositivos.php'; ?>
         <hr class="hr-minimalista">
 
 
         <div editable="rich">
             <!-- ========== <h2 class="display-5 fw-bold"> <?php echo ", $nombre_usuario!"; ?>Tu Nombre</h2> ========== -->
-            <h2 class="display-6 fw-bold text-start  Mis_Dispositivos" id="scrollEffectText1"></h2>
+
 
         </div>
-
-        <!-- ========== fornt de arriba =============================================== -->
-
-
-
-
-
-
-
-
         <!-- ========== Tarjetas Mis dispositivos ========== -->
 
-        <div id="scrollEffectText1">
-        <div>
-            <div class="px-3">
-                <h3 class="fw-bold">Actualizar Dispositivo</h3>
-                <form id="updateForm" class="row g-3 justify-content-center" method="POST" action="update_device.php">
-                    <div class="col-md-4 text-center">
-                        <label for="deviceSelect" class="form-label">Selecciona el dispositivo a actualizar:</label>
-                        <select class="form-select" id="deviceSelect" name="device_id" required>
-                            <?php
-                            // URL de la API
-                            $url = 'https://fe85-148-237-98-221.ngrok-free.app/api/device-type/get-all-device-types';
 
-                            // Iniciar la solicitud cURL
-                            $curl = curl_init($url);
-                            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-                                'Accept: application/json', // Modificado para aceptar JSON
-                            ));
-
-                            // Ejecutar la solicitud y obtener la respuesta
-                            $response = curl_exec($curl);
-                            $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-                            // Cerrar la conexión cURL
-                            curl_close($curl);
-
-                            if ($httpCode == 200) {
-                                // Decodificar la respuesta JSON
-                                $responseData = json_decode($response, true);
-
-                                if ($responseData !== null) {
-                                    // Mostrar opciones de dispositivos obtenidos de la API
-                                    foreach ($responseData as $deviceType) {
-                                        echo '<option value="' . $deviceType['deviceTypeId'] . '">' . $deviceType['deviceTypeName'] . '</option>';
-                                    }
-                                } else {
-                                    echo '<option value="">No hay dispositivos disponibles</option>';
-                                }
-                            } else {
-                                echo '<option value="">Error al obtener dispositivos</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <label for="newName" class="form-label">Nuevo Nombre:</label>
-                        <input type="text" class="form-control" id="newName" name="new_name" required>
-                    </div>
-                    <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
-                    </div>
-                </form>
+        <div class="" id="scrollEffectText1">
+            <div class="">
+                <div class="px-3">
+                    <h3 class="fw-bold">Crear un Nuevo Dispositivo</h3>
+                    <form action="/Funciones_Device/Create_Device.php" method="post">
+                        <label for="deviceName">Nombre del Dispositivo:</label>
+                        <input type="text" id="deviceName" name="deviceName" required>
+                        <button class="btn btn-primary" type="submit">Agregar Dispositivo</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-        </div>
-    </div>
+        <hr class="hr-minimalista">
 
 
 
+        <style>
+            .btn-estado {
+                padding: 0.5rem 1rem;
+                border: 2px solid transparent;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
 
-    <hr class="hr-minimalista">
-    <div editable="rich">
-        <!-- ========== <h2 class="display-5 fw-bold"> <?php echo ", $nombre_usuario!"; ?>Tu Nombre</h2> ========== -->
-        <h2 class="display-6 fw-bold text-start  Mis_Dispositivos"></h2>
+            .btn-activo {
+                background-color: #28a745;
+                color: #fff;
+                border-color: #28a745;
+            }
 
-    </div>
+            .btn-inactivo {
+                background-color: #dc3545;
+                color: #fff;
+                border-color: #dc3545;
+            }
 
-    <style>
-        .btn-estado {
-            padding: 0.5rem 1rem;
-            border: 2px solid transparent;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+            .btn-estado:hover {
+                opacity: 0.8;
+            }
 
-        .btn-activo {
-            background-color: #28a745;
-            color: #fff;
-            border-color: #28a745;
-        }
+            .icono-activo:before {
+                content: "\f3fd";
+                /* Icono de check */
+                font-family: 'Font Awesome 5 Free';
+                margin-right: 0.5rem;
+            }
 
-        .btn-inactivo {
-            background-color: #dc3545;
-            color: #fff;
-            border-color: #dc3545;
-        }
+            .icono-inactivo:before {
+                content: "\f5c8";
+                /* Icono de equis */
+                font-family: 'Font Awesome 5 Free';
+                margin-right: 0.5rem;
+            }
 
-        .btn-estado:hover {
-            opacity: 0.8;
-        }
+            .circulo {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                display: inline-block;
+                margin-right: 10px;
+                /* Espacio entre los círculos */
+            }
 
-        .icono-activo:before {
-            content: "\f3fd";
-            /* Icono de check */
-            font-family: 'Font Awesome 5 Free';
-            margin-right: 0.5rem;
-        }
+            .circulo-rojo {
+                background-color: #dc3545;
+                /* Rojo */
+            }
 
-        .icono-inactivo:before {
-            content: "\f5c8";
-            /* Icono de equis */
-            font-family: 'Font Awesome 5 Free';
-            margin-right: 0.5rem;
-        }
-
-        .circulo {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 10px;
-            /* Espacio entre los círculos */
-        }
-
-        .circulo-rojo {
-            background-color: #dc3545;
-            /* Rojo */
-        }
-
-        .circulo-verde {
-            background-color: #28a745;
-            /* Verde */
-        }
+            .circulo-verde {
+                background-color: #28a745;
+                /* Verde */
+            }
 
 
 
-        /*********************************************  Linea de Tiempo Podria ocuparla despues
+            /*********************************************  Linea de Tiempo Podria ocuparla despues
 
            
 
@@ -475,20 +371,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 border-radius: 50%;
                 background-color: black;
             }***********************/
-    </style>
+        </style>
 
 
-
-
-
-
-
-
-
-
-
-
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 </body>
 

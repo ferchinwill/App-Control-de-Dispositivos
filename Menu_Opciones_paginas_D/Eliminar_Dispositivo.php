@@ -1,3 +1,61 @@
+<?php
+
+require '/Embebidos_Proyect/Apis/Apis.php';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtener el cuerpo de la solicitud POST
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    if (isset($data['deviceId']) && isset($data['active'])) {
+        $device_id = $data['deviceId'];
+        $active = $data['active'];
+
+        // URL de la API para actualizar el estado del dispositivo
+        $update_url = $ApiLink . '/api/device/update-device';
+        // Datos a enviar en la solicitud POST
+        $post_data = array(
+            'deviceId' => $device_id,
+            'active' => $active
+        );
+
+        // Iniciar la solicitud cURL para actualizar el estado del dispositivo
+        $update_curl = curl_init($update_url);
+        curl_setopt($update_curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($update_curl, CURLOPT_POST, true);
+        curl_setopt($update_curl, CURLOPT_POSTFIELDS, json_encode($post_data));
+        curl_setopt($update_curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Accept: application/json',
+        ));
+
+        // Ejecutar la solicitud y obtener la respuesta
+        $update_response = curl_exec($update_curl);
+        $update_httpCode = curl_getinfo($update_curl, CURLINFO_HTTP_CODE);
+
+        // Cerrar la conexión cURL
+        curl_close($update_curl);
+
+        // Verificar el código de estado HTTP de la respuesta
+        if ($update_httpCode == 200) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'httpCode' => $update_httpCode]);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Datos inválidos']);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+}
+
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -208,18 +266,14 @@
         </div>
         <div class="lc-block col-lg-6 mx-auto mb-4">
             <div editable="rich">
-
-
             </div>
         </div>
 
-        <style>
 
-        </style>
         <a href=""></a>
 
-          <!----Barra de Navegacion--->
-          <?php require '/Embebidos_Proyect/Barra_Menu/Barra_menu.php'; ?>
+        <!----Barra de Navegacion--->
+        <?php require '/Embebidos_Proyect/Barra_Menu/Barra_Menu_Dispositivos.php'; ?>
         <hr class="hr-minimalista">
 
 
@@ -229,97 +283,39 @@
 
         </div>
         <!-- ========== Tarjetas Mis dispositivos ========== -->
-
-
-        <div class="" id="scrollEffectText1" i="">
         <div class="mx-auto col-xl-6" id="scrollEffectText1">
             <div class="lc-block d-sm-flex align-items-center mb-4 Tarjeta">
                 <div class="px-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-gear-fill" viewBox="0 0 16 16">
-                        <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708z" />
-                        <path d="M11.07 9.047a1.5 1.5 0 0 0-1.742.26l-.02.021a1.5 1.5 0 0 0-.261 1.742 1.5 1.5 0 0 0 0 2.86 1.5 1.5 0 0 0-.12 1.07H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6 4.724 4.724a1.5 1.5 0 0 0-1.654 1.03" />
-                        <path d="m13.158 9.608-.043-.148c-.181-.613-1.049-.613-1.23 0l-.043.148a.64.64 0 0 1-.921.382l-.136-.074c-.561-.306-1.175.308-.87.869l.075.136a.64.64 0 0 1-.382.92l-.148.045c-.613.18-.613 1.048 0 1.229l.148.043a.64.64 0 0 1 .382.921l-.074.136c-.306.561.308 1.175.869.87l.136-.075a.64.64 0 0 1 .92.382l.045.149c.18.612 1.048.612 1.229 0l.043-.15a.64.64 0 0 1 .921-.38l.136.074c.561.305 1.175-.309.87-.87l-.075-.136a.64.64 0 0 1 .382-.92l.149-.044c.612-.181.612-1.049 0-1.23l-.15-.043a.64.64 0 0 1-.38-.921l.074-.136c.305-.561-.309-1.175-.87-.87l-.136.075a.64.64 0 0 1-.92-.382ZM12.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-x-fill" viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+                        <path d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.646a.5.5 0 0 1 .708.707l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.707l.647-.647-.647-.646a.5.5 0 0 1 .708-.707Z" />
                     </svg>
                 </div>
                 <div class="flex-grow-1">
                     <div class="lc-name d-flex align-items-center justify-content-between">
                         <div class="d-grid gap-2 d-md-flex justify-content-start">
-                            Dispositivo:
-                            <div class="px-5" style="font-size: 15px; font-weight: lighter; margin-top: 3px;"><?php echo $deviceList1; ?></div> <!-- Aquí se muestra $deviceList1 -->
+                            <label for="device_id">Ingrese el Dispositivo: </label>
+                            <div class="input-group mb-3">
+                                <input type="number" id="device_id" name="device_id" class="form-control" placeholder="Ingrese el ID" aria-describedby="basic-addon2">
+                                <span class="input-group-text" id="basic-addon2"></span>
+                            </div>
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-end">
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="lc-block d-sm-flex align-items-center mb-4 Tarjeta" id="tarjeta2">
-                <div class="px-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-gear-fill" viewBox="0 0 16 16">
-                        <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708z" />
-                        <path d="M11.07 9.047a1.5 1.5 0 0 0-1.742.26l-.02.021a1.5 1.5 0 0 0-.261 1.742 1.5 1.5 0 0 0 0 2.86 1.5 1.5 0 0 0-.12 1.07H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6 4.724 4.724a1.5 1.5 0 0 0-1.654 1.03" />
-                        <path d="m13.158 9.608-.043-.148c-.181-.613-1.049-.613-1.23 0l-.043.148a.64.64 0 0 1-.921.382l-.136-.074c-.561-.306-1.175.308-.87.869l.075.136a.64.64 0 0 1-.382.92l-.148.045c-.613.18-.613 1.048 0 1.229l.148.043a.64.64 0 0 1 .382.921l-.074.136c-.306.561.308 1.175.869.87l.136-.075a.64.64 0 0 1 .92.382l.045.149c.18.612 1.048.612 1.229 0l.043-.15a.64.64 0 0 1 .921-.38l.136.074c.561.305 1.175-.309.87-.87l-.075-.136a.64.64 0 0 1 .382-.92l.149-.044c.612-.181.612-1.049 0-1.23l-.15-.043a.64.64 0 0 1-.38-.921l.074-.136c.305-.561-.309-1.175-.87-.87l-.136.075a.64.64 0 0 1-.92-.382ZM12.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-                    </svg>
-                </div>
-                <div class="flex-grow-1">
-                    <div class="lc-name d-flex align-items-center justify-content-between"> <!-- Cambiado a d-flex y justify-content-between -->
-                        <div class="d-grid gap-2 d-md-flex justify-content-start"> <!-- Cambiado a justify-content-start -->
-                            Dispositivo:
-                            <div class="px-5" style="font-size: 15px; font-weight: lighter; margin-top: 3px;"><?php echo $deviceList2; ?></div> <!-- Aquí se muestra $deviceList1 -->
-
-                        </div>
-                        <div class="d-grid gap-2 d-md-flex justify-content-end"> <!-- Cambiado a justify-content-end -->
-
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="lc-block d-sm-flex align-items-center Tarjeta" id="tarjeta3">
-                <div class="px-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-gear-fill" viewBox="0 0 16 16">
-                        <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708z" />
-                        <path d="M11.07 9.047a1.5 1.5 0 0 0-1.742.26l-.02.021a1.5 1.5 0 0 0-.261 1.742 1.5 1.5 0 0 0 0 2.86 1.5 1.5 0 0 0-.12 1.07H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6 4.724 4.724a1.5 1.5 0 0 0-1.654 1.03" />
-                        <path d="m13.158 9.608-.043-.148c-.181-.613-1.049-.613-1.23 0l-.043.148a.64.64 0 0 1-.921.382l-.136-.074c-.561-.306-1.175.308-.87.869l.075.136a.64.64 0 0 1-.382.92l-.148.045c-.613.18-.613 1.048 0 1.229l.148.043a.64.64 0 0 1 .382.921l-.074.136c-.306.561.308 1.175.869.87l.136-.075a.64.64 0 0 1 .92.382l.045.149c.18.612 1.048.612 1.229 0l.043-.15a.64.64 0 0 1 .921-.38l.136.074c.561.305 1.175-.309.87-.87l-.075-.136a.64.64 0 0 1 .382-.92l.149-.044c.612-.181.612-1.049 0-1.23l-.15-.043a.64.64 0 0 1-.38-.921l.074-.136c.305-.561-.309-1.175-.87-.87l-.136.075a.64.64 0 0 1-.92-.382ZM12.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-                    </svg>
-                </div>
-                <div class="flex-grow-1">
-                    <div class="lc-name d-flex align-items-center justify-content-between"> <!-- Cambiado a d-flex y justify-content-between -->
-                        <div class="d-grid gap-2 d-md-flex justify-content-start"> <!-- Cambiado a justify-content-start -->
-                            Dispositivo:
-                            <div class="px-5" style="font-size: 15px; font-weight: lighter; margin-top: 3px;"><?php echo $deviceList3; ?></div> <!-- Aquí se muestra $deviceList1 -->
-
-                        </div>
-                        <div class="d-grid gap-2 d-md-flex justify-content-end"> <!-- Cambiado a justify-content-end -->
-
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-
+                            <button type="button" class="btn btn-danger">Eliminar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+
+
+
+
+
+
+
         <hr class="hr-minimalista">
-        <script>
-            document.getElementById('miFormulario').addEventListener('submit', function(event) {
-                event.preventDefault(); 
-                console.log('Formulario enviado, pero la página no se recarga');
-                
-            });
-        </script>
-
-
         <style>
             .btn-estado {
                 padding: 0.5rem 1rem;
@@ -445,8 +441,6 @@
                 background-color: black;
             }***********************/
         </style>
-
-
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 </body>
